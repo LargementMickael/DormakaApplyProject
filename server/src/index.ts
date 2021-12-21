@@ -9,6 +9,7 @@ const app: Express = express();
 const corsOptions: cors.CorsOptions = {
     origin: [String(process.env.CLIENT)]
 }
+
 app.use(cors(corsOptions));
 app.use(express.json());
 

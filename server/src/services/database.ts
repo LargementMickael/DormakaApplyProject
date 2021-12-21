@@ -15,5 +15,5 @@ export async function connectToDatabase(){
 
     collections.notes = notesCollection;
 
-    console.log(`Successfully connected to ${process.env.DB_COLLECTION} collection`);
+    console.log(`Successfully connected to collection`);
 }
