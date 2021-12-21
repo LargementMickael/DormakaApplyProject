@@ -1,10 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 
-
 const PORT = process.env.PORT || 8000;
 const app: Express = express();
-
 
 // Set up origin to avoid CORS issue when requesting the API
 // And not using '*' to fit the OWASP recommandations
