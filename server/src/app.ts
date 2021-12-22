@@ -3,7 +3,6 @@ import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import errorMiddleware from './middleware/error.middleware';
 
-
 // Set up origin to avoid CORS issue when requesting the API
 // And not using '*' to fit the OWASP recommandations
 const corsOptions: cors.CorsOptions = {
