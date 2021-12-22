@@ -26,7 +26,7 @@ services:
     ports:
       - 5000:5000
     environment:
-      - MONGO_URL=mongodb://db:27017
+      - MONGO_URL=mongodb+srv://dormakaba:dormakaba@cluster0.1yiwk.mongodb.net
       - CLIENT=http://localhost:3000
     networks:
       - mern-network
