@@ -1,6 +1,8 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
+import errorMiddleware from './middleware/error.middleware';
+
 
 // Set up origin to avoid CORS issue when requesting the API
 // And not using '*' to fit the OWASP recommandations
@@ -25,6 +27,7 @@ class App {
         this.app.use(bodyParser.json());
         this.app.use(cors(corsOptions));
         this.app.use(express.json());
+        this.app.use(errorMiddleware)
     }
     
     private initControllers(controllers: any){
