@@ -4,8 +4,6 @@ import HennController from './henns.controller'
 
 const app = new App([new HennController], 8000);
 
-// jest.setTimeout(10000000);
-
 describe("Henn controller endpoints testing", () => {
     
     it("GET /henns", async () => {
