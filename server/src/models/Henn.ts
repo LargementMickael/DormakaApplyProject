@@ -11,8 +11,14 @@ export default class Henn {
 }
 
 const HennSchema = new mongoose.Schema({
-    name: String,
-    breed: String
+    name: {
+        type: String,
+        required: true
+    },
+    breed: {
+        type: String,
+        required: true
+    }
 });
 
 export const HennModel = mongoose.model('henns', HennSchema);

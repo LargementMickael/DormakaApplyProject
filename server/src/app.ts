@@ -2,6 +2,7 @@ import express from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import errorMiddleware from './middleware/error.middleware';
+import { connectBD } from './services/database.service';
 
 // Set up origin to avoid CORS issue when requesting the API
 // And not using '*' to fit the OWASP recommandations
@@ -15,24 +16,27 @@ class App {
     public port: number;
 
     constructor(controllers: Controller[], port: number){
+
         this.app = express();
         this.port = port;
         
-        this.initializeMiddleware();
-        this.initControllers(controllers);
-    }
-
-    private initializeMiddleware(){
+        // Using middlewares
         this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(cors(corsOptions));
         this.app.use(express.json());
-        this.app.use(errorMiddleware)
-    }
-    
-    private initControllers(controllers: any){
-        controllers.map((controller: any) => {
+        this.app.use(errorMiddleware);
+
+        // Initialize database
+        connectBD();
+
+        controllers.map((controller: Controller) => {
             this.app.use('/', controller.router) 
         }); 
+    }
+
+    public getServer(){
+        return this.app;
     }
 
     public listen() {
