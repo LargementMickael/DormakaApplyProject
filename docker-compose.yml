@@ -43,7 +43,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_SERVER=http://localhost:5000
+      - API_SERVER=http://localhost:5000
       - CHOKIDAR_USEPOLLING=true
     networks:
       - mern-network

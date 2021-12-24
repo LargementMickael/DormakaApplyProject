@@ -1,6 +1,8 @@
+const HennServiceUrl: string = `http://localhost:5000/henns`;
+
 const loadHenns: () => Promise<Henn[]> = () => {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:5000/henns', {
+        fetch(HennServiceUrl, {
             method: 'GET'
         }).then(response => {
             return response.json();
@@ -19,7 +21,7 @@ const createHenn: (params: CreateHennRequest) => Promise<Henn> = (
     params
 ) => {
     return new Promise((resolve,reject) => {
-        fetch('http://localhost:5000/henns', {
+        fetch(HennServiceUrl, {
             method: 'POST',
             body: JSON.stringify(params),
             headers: {
@@ -39,7 +41,7 @@ const updateHenn: (id: string, params: CreateHennRequest) => Promise<Henn> = (
     params
 ) => {
     return new Promise((resolve,reject) => {
-        fetch(`http://localhost:5000/henns/${id}`, {
+        fetch(`${HennServiceUrl}/${id}`, {
             method: 'PATCH',
             body: JSON.stringify(params),
             headers: {

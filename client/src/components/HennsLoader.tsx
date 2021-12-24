@@ -3,7 +3,7 @@ import HennItem from './HennItem';
 import HennForm from "./HennForm";
 import { hennsService } from '../services/henns.service';
 
-const HennsList = (): JSX.Element => {
+const HennsLoader = (): JSX.Element => {
 
     // Use loading status to display datas availability
     const [henns, setHenns] = useState<Henn[] | []>([]);
@@ -64,4 +64,4 @@ const HennsList = (): JSX.Element => {
     )
 }
 
-export default HennsList;
+export default HennsLoader;

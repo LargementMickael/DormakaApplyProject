@@ -4,11 +4,13 @@ import Henn from './henn.interface';
 const HennSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'You must enter a name'],
+        maxLength: 20
     },
     breed: {
         type: String,
-        required: true
+        required: [true, 'You must enter a breed',
+        maxLength: 20
     }
 });
 
