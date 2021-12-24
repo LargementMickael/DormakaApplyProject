@@ -20,19 +20,15 @@ class HennController implements Controller {
         this.router.get(this.path, this.getAllHenns);
         this.router.post(this.path, this.createHenn);
         this.router.patch(`${this.path}/:id`, this.updateHenn);
-        console.log('> Routes are loaded');
     }
 
     getAllHenns = async (req: Request, res: Response) => {
-        console.log(">> Accessing GET/");
         this.henns.find().then((results) => {
             res.status(200).json(results);
         });
     }
 
     createHenn = async (req: Request, res: Response, next: NextFunction) => {
-        console.log(">> CREATE HENN");
-        console.log(req.body);
         new hennsModel(req.body).save()
         .then(result => res.status(200).send(result))
         .catch(err => next(new HttpException(400, err.message)))
