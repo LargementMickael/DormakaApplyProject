@@ -9,7 +9,7 @@ const HennSchema = new mongoose.Schema({
     },
     breed: {
         type: String,
-        required: [true, 'You must enter a breed',
+        required: [true, 'You must enter a breed'],
         maxLength: 20
     }
 });

@@ -2,18 +2,6 @@ version: '3.7'
 
 services:
 
-  mongo:
-    image: 'mongo'
-    container_name: mongo
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - 27017:27017
-    networks:
-      - mern-network
-    logging:
-      driver: none 
-
   server:
     depends_on:
       - mongo
@@ -51,7 +39,3 @@ services:
 networks:
   mern-network:
     driver: bridge
-
-volumes:
-  mongo-data:
-    driver: local
