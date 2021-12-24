@@ -1,18 +1,5 @@
-interface Restaurant {
-    address: {
-        building: string,
-    },
+interface Henn {
+    _id: string;
     name: string,
-    restaurant_id: number
+    breed: string
 }
-
-type RestaurantState = {
-    status: "FETCHING" | "RESOLVED" | "REJECTED",
-    restaurants: Restaurant[]
-}
-
-type RestaurantAction = {
-    type: string
-}
-
-type DispatchType = (args: RestaurantAction) => RestaurantAction

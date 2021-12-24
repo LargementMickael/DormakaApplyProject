@@ -1,19 +1,15 @@
 import React from 'react';
 import './App.css';
 
-type Props = {};
-type State = {};
+import HennsLoader from './components/HennsLoader';
 
-class App extends React.Component<Props, State> {
-    constructor(props: Props){
-        super(props);
-    }
-    
+class App extends React.Component<{},{}> {
     render(){
         return (
-            <div>
-                <h1>Restaurants List</h1>
-            </div>
+            <section>
+                <h1>Chicken Coop</h1>
+                <HennsLoader />
+            </section>
         )
     }
 }

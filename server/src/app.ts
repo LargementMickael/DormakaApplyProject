@@ -6,8 +6,11 @@ import { connectBD } from './services/database.service';
 
 // Set up origin to avoid CORS issue when requesting the API
 // And not using '*' to fit the OWASP recommandations
+// const corsOptions: cors.CorsOptions = {
+//     origin: [String(process.env.CLIENT)]
+// }
 const corsOptions: cors.CorsOptions = {
-    origin: [String(process.env.CLIENT)]
+    origin: '*'
 }
 
 class App {

@@ -31,6 +31,8 @@ class HennController implements Controller {
     }
 
     createHenn = async (req: Request, res: Response, next: NextFunction) => {
+        console.log(">> CREATE HENN");
+        console.log(req.body);
         new hennsModel(req.body).save()
         .then(result => res.status(200).send(result))
         .catch(err => next(new HttpException(400, err.message)))
