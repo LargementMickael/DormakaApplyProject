@@ -6,8 +6,6 @@ interface Props {
 
 const HennsList = (props: Props): JSX.Element => {
 
-    console.log(props.henns);
-
     const HennListStyle = {
         width: '100%',
         backgroundColor: '#FAFAFA'
@@ -16,7 +14,7 @@ const HennsList = (props: Props): JSX.Element => {
     return (
         <div style={HennListStyle}>
             { 
-                props.henns.length > 0 &&
+                props.henns.length > 0 ? (
                     props.henns
                     .sort((a: Henn,b: Henn) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
                     .map((henn: Henn) => {
@@ -24,6 +22,9 @@ const HennsList = (props: Props): JSX.Element => {
                         console.log(henn);
                         return <HennItem {...henn} key={henn._id} />
                     })
+                ) : (
+                    <span className="row center">No henns</span>
+                )
             }
         </div>
     )
