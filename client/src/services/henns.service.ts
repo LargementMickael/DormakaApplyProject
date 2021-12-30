@@ -14,7 +14,8 @@ const loadHenns: () => Promise<Henn[]> = () => {
 
 export interface CreateHennRequest {
     name: string,
-    breed: string
+    breed: string,
+    imageUrl: string
 }
 
 const createHenn: (params: CreateHennRequest) => Promise<Henn> = (
@@ -26,7 +27,6 @@ const createHenn: (params: CreateHennRequest) => Promise<Henn> = (
             body: JSON.stringify(params),
             headers: {
                 'Content-Type': 'application/json',
-
             },
         }).then(response => {
             return response.json();
@@ -36,7 +36,12 @@ const createHenn: (params: CreateHennRequest) => Promise<Henn> = (
     });
 }
 
-const updateHenn: (id: string, params: CreateHennRequest) => Promise<Henn> = (
+export interface UpdateHennRequest {
+    name: string,
+    breed: string,
+}
+
+const updateHenn: (id: string, params: UpdateHennRequest) => Promise<Henn> = (
     id,
     params
 ) => {

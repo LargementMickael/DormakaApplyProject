@@ -1,0 +1,32 @@
+#HennForm{
+    float:left;
+    width:350px;
+    border-radius:15px;
+    background-color:#fafafa;
+    padding:15px;
+    margin-left:calc((100% - 350px) / 2);
+}
+
+/* Submit & Cancel buttons */
+#HennForm input[type='submit']{
+    border:none;
+    background-color:#64b5f6;
+    color:white;
+    font-weight:500;
+    line-height:31px;
+    height:31px;
+    border-radius:5px;
+    padding:0 10px;
+    float:right;
+    margin-top:15px;
+}
+#HennForm input[type='submit']:hover{
+    background-color: #2286c3;
+    cursor:pointer;
+}
+#HennForm input[type='submit']:disabled{
+    background-color: grey;
+}
+#HennForm input[type='submit']:disabled:hover{
+    cursor:not-allowed;
+}

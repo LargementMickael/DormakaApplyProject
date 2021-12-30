@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import HennsLoader from './components/HennsLoader';
+import HennsList from './components/HennsList';
 
 class App extends React.Component<{},{}> {
     render(){
         return (
             <section>
                 <h1>Chicken Coop</h1>
-                <HennsLoader />
+                <HennsList />
             </section>
         )
     }

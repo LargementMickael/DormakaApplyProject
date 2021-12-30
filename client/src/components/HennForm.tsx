@@ -1,45 +1,111 @@
-import { useState } from 'react';
-import { TextField, Button } from '@mui/material';
+import React from 'react';
 import { hennsService, CreateHennRequest } from '../services/henns.service';
+import CustomInputForm from './CustomInputForm';
 
-const HennForm = (props: any): JSX.Element => {
-    
-    const [name, setName] = useState('');
-    const [breed, setBreed] = useState('');
+import { checkErrorsPresence } from '../utils/CheckErrorsPresence';
 
-    const handleSave = () => {
-        var body: CreateHennRequest = {
-            name: name,
-            breed: breed
+import "./HennForm.css";
+
+interface Props {
+    addHennCb: (elem: Henn) => void,
+}
+interface State {
+    fields: {
+        [key: string]: string
+    },
+    errors: {
+        [key: string]: string
+    },
+}
+
+class HennForm extends React.Component <Props,State> {
+
+    // Array of henn's pictures
+    private hennsImagesUrl: string[] = [
+        '/assets/images/poule1.jpg',
+        '/assets/images/poule2.jpg',
+        '/assets/images/poule3.jpg'
+    ];
+
+    constructor(props: Props){
+        super(props);
+        this.state = {
+            fields: {
+                name: '',
+                breed: '',
+            },
+            errors: {
+                name: '',
+                breed: ''
+            },
         }
-        hennsService.createHenn(body).then((res) => {
-            console.log(res);
-            props.cbFn();
-        });
     }
 
-    return (
-        <form id="hennForm">
-            <TextField 
-                id="outlined-basic" 
-                label="Name" 
-                variant="outlined" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField 
-                id="outlined-basic" 
-                label="Breed" 
-                variant="outlined" 
-                value={breed} 
-                onChange={(e) => setBreed(e.target.value)} 
-                style={{marginLeft: 15}}
-            />
-            <Button onClick={() => handleSave()}>
-                Create
-            </Button>
-        </form>
-    )
+    /** 
+     * Get a random henn's picture's URL
+     * Generate number between 0 and Array.length; cast it to integer using Math.floor()
+     * @return {string} a concat String of public folder & a random URL from the hennsImagesUrl Array
+    */
+    getRandomImageUrl = () => {
+        let randomPos: number = Math.floor(Math.random() * this.hennsImagesUrl.length);
+        return this.hennsImagesUrl[randomPos];
+    }  
+
+    /**
+    * Stock returned values from CustomInput component into the State
+    */ 
+    inputChangeHandler = (inputName: string, inputValue: string, error: string): void => {
+
+        let state: State = this.state;
+
+        state.fields[inputName] = inputValue;
+        state.errors[inputName] = error;
+     
+        this.setState(state);
+    }
+
+    handleSave = (e: React.FormEvent) => {
+
+        e.preventDefault();
+
+        var body: CreateHennRequest = {
+            name: this.state.fields['name'],
+            breed: this.state.fields['breed'],
+            imageUrl: this.getRandomImageUrl()
+        }
+        hennsService.createHenn(body).then((res) => {
+            this.props.addHennCb(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    
+    render(){
+        return (
+            <form id="HennForm">
+                <CustomInputForm 
+                    name="name" 
+                    label="Name" 
+                    mode='EDIT' 
+                    value={this.state.fields['name']}
+                    onChange={this.inputChangeHandler}
+                />
+                <CustomInputForm 
+                    name="breed" 
+                    label="Breed" 
+                    mode='EDIT'
+                    value={this.state.fields['breed']}
+                    onChange={this.inputChangeHandler}
+                />
+                <input 
+                    type="submit" 
+                    onClick={e => this.handleSave(e)}
+                    disabled={checkErrorsPresence(this.state.errors) || this.state.fields['name'] === "" || this.state.fields['breed'] === ""} 
+                    value="Create"
+                />
+            </form>
+        )   
+    }
 }
 
 export default HennForm;

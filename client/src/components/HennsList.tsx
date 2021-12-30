@@ -13,19 +13,21 @@ const HennsLoader = (): JSX.Element => {
      * Load henns from GET /henns 
      * Adding setTimeout to seeing the 'loading' status
      * Fill henns<Henns> State, and update loading status 
-     * 
     */ 
     const loadHennsData = () => {
         hennsService.loadHenns()
         .then((res) => {
-            window.setTimeout(() => {
-                setHenns(res);
-                setLoadingState('RESOLVED');
-            },500)
+            setHenns(res);
+            setLoadingState('RESOLVED');
         })
         .catch(() => {
             setLoadingState('REJECTED');
         });
+    }
+
+    const addHennHandler = (henn: Henn) => {
+        let newHennsList: Henn[] = [...henns, henn];
+        setHenns(newHennsList);
     }
 
     // Use useEffect to load datas on component display
@@ -40,15 +42,20 @@ const HennsLoader = (): JSX.Element => {
 
     return (
         <section>
+            <div style={{float:'left', width: '100%'}}>
+                <HennForm addHennCb={addHennHandler} />
+            </div>
             <div style={HennListStyle}>
                 {  
-                    (loadingState === 'LOADING' && henns.length === 0) && 
+                    ( loadingState === 'LOADING' && henns.length === 0) && 
                         <article>Loading ...</article>
                 }
                 {
                     ( loadingState === 'RESOLVED' && henns.length > 0 ) && 
-                        henns.map((henn, index) => {
-                            return <HennItem {...henn} key={index} cbFn={() => loadHennsData()} />
+                        henns
+                        .sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+                        .map((henn) => {
+                            return <HennItem {...henn} key={henn._id} />
                         })
                 }
                 {
@@ -56,10 +63,6 @@ const HennsLoader = (): JSX.Element => {
                         <article>Error loading henns<br/><button onClick={() => loadHennsData()}>Retry</button></article>
                 }
             </div>
-            <div style={{float:'left', width: '100%'}}>
-                <HennForm cbFn={() => loadHennsData()} />
-            </div>
-            
         </section>
     )
 }

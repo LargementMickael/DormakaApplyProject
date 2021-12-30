@@ -1,5 +1,6 @@
 interface Henn {
     _id: string;
     name: string,
-    breed: string
+    breed: string,
+    imageUrl?: string
 }

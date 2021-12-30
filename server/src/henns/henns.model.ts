@@ -11,6 +11,10 @@ const HennSchema = new mongoose.Schema({
         type: String,
         required: [true, 'You must enter a breed'],
         maxLength: 20
+    },
+    imageUrl: {
+        type: String,
+        required: false,
     }
 });
 

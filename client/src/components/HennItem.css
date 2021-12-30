@@ -1,0 +1,93 @@
+/* HennItem View mode structure */
+.HennItem{
+    float:left;
+    position:relative;
+    width:500px;
+    height:210px;
+    margin:15px;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow: -2px -1px 10px #dedede;
+}
+.HennItem img[alt='Henn']{
+    float:left;
+    width:150px;
+    height:100%;
+    object-fit: cover;
+}
+.HennItem .formDetails{
+    float:left;
+    height:100%;
+    width:calc(100% - 150px);
+    padding:10px;
+    box-sizing:border-box;
+    background-color:#fafafa;
+}
+.HennItem .formDetails .formActions{
+    float:left;
+    width:100%;
+    margin-top:15px;
+}
+
+
+/* Submit & Cancel buttons */
+.HennItem .formDetails .submitButton,
+.HennItem .formDetails .cancelButton{
+    border:none;
+    background-color:#64b5f6;
+    color:white;
+    font-weight:500;
+    line-height:31px;
+    height:31px;
+    border-radius:5px;
+    padding:0 10px;
+    float:right;
+}
+.HennItem .formDetails .submitButton:hover{
+    background-color: #2286c3;
+    cursor:pointer;
+}
+.HennItem .formDetails .submitButton:disabled{
+    background-color: grey;
+}
+.HennItem .formDetails .submitButton:disabled:hover{
+    cursor:not-allowed;
+}
+.HennItem .formDetails .cancelButton{
+    background-color:#dedede;
+    margin-right:5px;
+}
+.HennItem .formDetails .cancelButton:hover{
+    background-color:#c62828;
+    cursor:pointer;
+}
+
+/* Change mode button */
+.HennItem .button_changeMode{
+    float:left;
+    width:auto;
+    position:absolute;
+    top:10px;
+    right:10px;
+    z-index:99;
+    background:none;
+    border:none;
+    color:#64b5f6
+}
+.HennItem .button_changeMode span{
+    float:left;
+    width:auto;
+    height:17px;
+    line-height:17px;
+    margin-right:5px;
+    text-transform:uppercase;
+    font-size:0.8em;
+    font-weight:700;
+}
+.HennItem .button_changeMode svg{
+    font-size:17px;
+}
+.HennItem .button_changeMode:hover{
+    cursor:pointer;
+    color:#2286c3;
+}

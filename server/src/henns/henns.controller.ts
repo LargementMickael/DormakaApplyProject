@@ -11,8 +11,6 @@ class HennController implements Controller {
     private henns = hennsModel;
 
     constructor(){  
-        // First of all, connect DB to avoid no results
-        // Then, load datas before creating endpoints 
         this.initRoutes();
     } 
 
@@ -29,7 +27,12 @@ class HennController implements Controller {
     }
 
     createHenn = async (req: Request, res: Response, next: NextFunction) => {
-        new hennsModel(req.body).save()
+        var payload: Henn = {
+            name: req.body.name,
+            breed: req.body.breed,
+            imageUrl: req.body.imageUrl
+        }
+        new hennsModel(payload).save()
         .then(result => res.status(200).send(result))
         .catch(err => next(new HttpException(400, err.message)))
     }
