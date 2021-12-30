@@ -18,7 +18,6 @@
     border-radius:5px;
     padding:0 10px;
     float:right;
-    margin-top:15px;
 }
 #HennForm input[type='submit']:hover{
     background-color: #2286c3;
@@ -29,4 +28,17 @@
 }
 #HennForm input[type='submit']:disabled:hover{
     cursor:not-allowed;
+}
+
+#HennForm .formActions{
+    float:left;
+    width:100%;
+    margin-top:15px;
+}
+#HennForm .formActions .error{
+    float:right;
+    width:auto;
+    padding-right:10px;
+    line-height:31px;
+    color:#c62828;
 }

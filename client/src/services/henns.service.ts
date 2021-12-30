@@ -4,11 +4,16 @@ const loadHenns: () => Promise<Henn[]> = () => {
     return new Promise((resolve, reject) => {
         fetch(HennServiceUrl, {
             method: 'GET'
-        }).then(response => {
+        })
+        .then(response => {
             return response.json();
-        }).then(jsonResults => {
+        })
+        .then(jsonResults => {
             resolve(jsonResults);
         })
+        .catch(err => {
+            reject(err);
+        });
     });
 }
 
@@ -28,11 +33,16 @@ const createHenn: (params: CreateHennRequest) => Promise<Henn> = (
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(response => {
+        })
+        .then(response => {
             return response.json();
-        }).then(jsonResults => {
+        })
+        .then(jsonResults => {
             resolve(jsonResults);
         })
+        .catch(err => {
+            reject(err);
+        });
     });
 }
 
@@ -52,11 +62,16 @@ const updateHenn: (id: string, params: UpdateHennRequest) => Promise<Henn> = (
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(response => {
+        })
+        .then(response => {
             return response.json();
-        }).then(jsonResults => {
+        })
+        .then(jsonResults => {
             resolve(jsonResults);
         })
+        .catch(err => {
+            reject(err);
+        });
     });
 }
 

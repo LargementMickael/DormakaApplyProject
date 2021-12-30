@@ -12,4 +12,12 @@ code {
     monospace;
 }
 
+.row{
+    float:left;
+    width:100%;
+}
+.center{
+    text-align:center;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700,400,500,300&display=swap');
