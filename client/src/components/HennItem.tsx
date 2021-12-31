@@ -134,7 +134,10 @@ class HennItem extends React.Component<Henn,State>{
                 <div className="formDetails">
                     { 
                         this.state.mode === 'VIEW' && (
-                            <button className="button_changeMode" onClick={() => this.changeMode()}>
+                            <button 
+                                className="button_changeMode" 
+                                onClick={() => this.changeMode()} 
+                            >
                                 <span>Edit</span>
                                 <FontAwesomeIcon icon={faPenSquare} />
                             </button>
