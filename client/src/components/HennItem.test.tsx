@@ -1,8 +1,9 @@
 import React from "react";
-import Enzyme from 'enzyme';
+import Enzyme, { shallow, mount, render } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import HennItem from "./HennItem";
+import { hennsService } from '../services/henns.service';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -13,12 +14,14 @@ const mockHenn: Henn = {
     imageUrl: ""
 }
 
-var wrapper: any;
+hennsService.updateHenn = jest.fn();
+
+const wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
 
 describe("HennItem component", () => {
 
     beforeAll(() => {
-        wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
+        // wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
     });
 
     test("Should render HTML Element with 'HennItem' class", () => {
@@ -46,4 +49,16 @@ describe("HennItem component", () => {
         expect(mountWrapper.find("input[name='name']").render().attr('value')).toEqual(mockHenn.name);
         expect(mountWrapper.find("input[name='breed']").render().attr('value')).toEqual(mockHenn.breed);
     });
+
+    test("inputChangeHandler() should update State", () => {
+        const updatedHenn: Henn = {
+            _id: '',
+            name: "UpdatedName",
+            breed: "UpdatedBreed",
+            imageUrl: ""
+        }
+        wrapper.instance().inputChangeHandler('name',updatedHenn.name,'');
+        expect(wrapper.state('fields')._temp_name).toEqual(updatedHenn.name);
+    });
+
 });
