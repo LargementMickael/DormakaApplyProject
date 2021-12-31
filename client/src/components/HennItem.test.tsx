@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, { shallow, mount, render } from 'enzyme';
+import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import HennItem from "./HennItem";
@@ -13,12 +13,12 @@ const mockHenn: Henn = {
     imageUrl: ""
 }
 
-var wrapper: Enzyme.ReactWrapper;
+var wrapper: any;
 
 describe("HennItem component", () => {
 
     beforeAll(() => {
-        wrapper = mount(<HennItem {...mockHenn} />);
+        wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
     });
 
     test("Should render HTML Element with 'HennItem' class", () => {
@@ -26,12 +26,11 @@ describe("HennItem component", () => {
     });
 
     test("changeMode() should update the State[mode]", () => {
-        const shallowComponent = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);
-        expect(shallowComponent.state('mode')).toEqual('VIEW');
-        shallowComponent.instance().changeMode();
-        expect(shallowComponent.state('mode')).toEqual('EDIT');
-        shallowComponent.instance().changeMode();
-        expect(shallowComponent.state('mode')).toEqual('VIEW');
+        expect(wrapper.state('mode')).toEqual('VIEW');
+        wrapper.instance().changeMode();
+        expect(wrapper.state('mode')).toEqual('EDIT');
+        wrapper.instance().changeMode();
+        expect(wrapper.state('mode')).toEqual('VIEW');
     });
 
     test("Edit & Cancel button should update the State[mode]", () => {
@@ -43,26 +42,8 @@ describe("HennItem component", () => {
     });
 
     test("Should be initialized with MockHenn's informations into inputs", () => {
-        expect(wrapper.find("input[name='name']").render().attr('value')).toEqual(mockHenn.name);
-        expect(wrapper.find("input[name='breed']").render().attr('value')).toEqual(mockHenn.breed);
+        var mountWrapper = Enzyme.mount(<HennItem {...mockHenn} />);
+        expect(mountWrapper.find("input[name='name']").render().attr('value')).toEqual(mockHenn.name);
+        expect(mountWrapper.find("input[name='breed']").render().attr('value')).toEqual(mockHenn.breed);
     });
-
-    test("inputChangeHandler() should affect modified values to corresponding _temp_[inputName] State", () => {
-        const shallowComponent = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);
-        const updatedName: string = 'updatedName';
-        expect(shallowComponent.state("fields")).toEqual({
-            name: mockHenn.name,
-            _temp_name: mockHenn.name,
-            breed: mockHenn.breed,
-            _temp_breed: mockHenn.breed,
-        });
-        shallowComponent.instance().inputChangeHandler('name',updatedName,'');
-        expect(shallowComponent.state("fields")).toEqual({
-            name: mockHenn.name,
-            _temp_name: updatedName,
-            breed: mockHenn.breed,
-            _temp_breed: mockHenn.breed,
-        });
-    });
-
 });
