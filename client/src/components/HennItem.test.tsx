@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, { shallow, mount, render } from 'enzyme';
+import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import HennItem from "./HennItem";
@@ -26,7 +26,7 @@ const wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);
 
 jest.mock('../services/henns.service');
 
-describe("HennItem component", () => {
+describe("HennItem Component", () => {
 
     beforeAll(() => {
         // wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
