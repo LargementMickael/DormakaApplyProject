@@ -3,7 +3,15 @@ import Enzyme, { shallow, mount, render } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import HennItem from "./HennItem";
-import { hennsService } from '../services/henns.service';
+import { hennsService, UpdateHennRequest } from '../services/henns.service';
+
+jest.spyOn(hennsService, 'updateHenn').mockImplementation((id: string, params: UpdateHennRequest) => new Promise((resolve,reject) => {
+    resolve({
+        _id: '',
+        name: 'UpdatedName',
+        breed: 'UpdatedBreed'
+    })
+}));
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -14,9 +22,9 @@ const mockHenn: Henn = {
     imageUrl: ""
 }
 
-hennsService.updateHenn = jest.fn();
-
 const wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
+
+jest.mock('../services/henns.service');
 
 describe("HennItem component", () => {
 
@@ -59,6 +67,24 @@ describe("HennItem component", () => {
         }
         wrapper.instance().inputChangeHandler('name',updatedHenn.name,'');
         expect(wrapper.state('fields')._temp_name).toEqual(updatedHenn.name);
+    });
+
+    test("Update Henn", () => {
+        const updatedHenn: Henn = {
+            _id: '',
+            name: 'UpdatedName',
+            breed: 'UpdatedBreed'
+        }
+        wrapper.instance().updateHenn(updatedHenn._id, updatedHenn.name, updatedHenn.breed);
+    });
+
+    test('Submit Form', () => {
+        const updateHennMethodSpy = jest.spyOn(wrapper.instance(), 'updateHenn');
+        expect(wrapper.state('mode')).toEqual('VIEW');
+        wrapper.find(".button_changeMode").simulate("click");
+        expect(wrapper.state('mode')).toEqual('EDIT');
+        wrapper.find(".submitButton").simulate('click');
+        expect(updateHennMethodSpy).toHaveBeenCalledTimes(1);
     });
 
 });

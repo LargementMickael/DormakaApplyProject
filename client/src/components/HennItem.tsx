@@ -100,27 +100,29 @@ class HennItem extends React.Component<Henn,State>{
     /**
      * Update updating task status and call /POST henn
     */ 
-    updateHenn = (): void => {
+    updateHenn = (_id: string, name: string, breed: string): Promise<Henn> => {
 
         this.setState({
             updatingStatus: 'LOADING'
         });
 
         let state: State = this.state;
-        hennsService.updateHenn(
-            this.props._id,
-            {
-                name: this.state.fields['_temp_name'],
-                breed: this.state.fields['_temp_breed']
-            }
-        ).then((res) => {
-            window.setTimeout(() => {
+
+        return new Promise((resolve,reject) => {
+            hennsService.updateHenn(
+                this.props._id,
+                {
+                    name: this.state.fields['_temp_name'],
+                    breed: this.state.fields['_temp_breed']
+                }
+            ).then((res) => {
                 state.mode = 'VIEW';
                 state.updatingStatus = 'RESOLVED';
                 state.fields['name'] = res.name;
                 state.fields['breed'] = res.breed;
                 this.setState(state);
-            },2000); 
+                return res;
+            });
         });
     }
 
@@ -162,7 +164,11 @@ class HennItem extends React.Component<Henn,State>{
                     { 
                         this.state.mode === 'EDIT' && (
                             <div className="formActions">
-                                <button className="submitButton" disabled={checkErrorsPresence(this.state.errors) || this.state.updatingStatus !== 'RESOLVED'} onClick={() => this.updateHenn()}>
+                                <button 
+                                    className="submitButton" 
+                                    disabled={checkErrorsPresence(this.state.errors) || this.state.updatingStatus !== 'RESOLVED'} 
+                                    onClick={() => this.updateHenn(this.props._id, this.state.fields['_temp_name'], this.state.fields['_temp_breed'])}
+                                >
                                     {this.state.updatingStatus === 'RESOLVED' ? 'Update' : 'Updating ...'}
                                 </button>
                                 <button className="cancelButton" onClick={() => this.cancelCurrentChanges()}>
