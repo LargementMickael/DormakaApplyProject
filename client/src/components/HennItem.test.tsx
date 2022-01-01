@@ -78,7 +78,7 @@ describe("HennItem component", () => {
         wrapper.instance().updateHenn(updatedHenn._id, updatedHenn.name, updatedHenn.breed);
     });
 
-    test('Submit Form', () => {
+    test('Submit Form button should call updateHenn method from Component', () => {
         const updateHennMethodSpy = jest.spyOn(wrapper.instance(), 'updateHenn');
         expect(wrapper.state('mode')).toEqual('VIEW');
         wrapper.find(".button_changeMode").simulate("click");
