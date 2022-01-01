@@ -33,7 +33,7 @@ describe("Henns Services API calls testing", () => {
             expect(res).toEqual(loadingHennsResult);
         })
     });
-
+    
     test("Updating henn endpoint", () => {
         return hennsService.updateHenn(
             '', 

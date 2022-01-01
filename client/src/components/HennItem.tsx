@@ -121,7 +121,7 @@ class HennItem extends React.Component<Henn,State>{
                 state.fields['name'] = res.name;
                 state.fields['breed'] = res.breed;
                 this.setState(state);
-                return res;
+                resolve(res);
             });
         });
     }

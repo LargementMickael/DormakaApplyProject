@@ -3,15 +3,7 @@ import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import HennItem from "./HennItem";
-import { hennsService, UpdateHennRequest } from '../services/henns.service';
-
-jest.spyOn(hennsService, 'updateHenn').mockImplementation((id: string, params: UpdateHennRequest) => new Promise((resolve,reject) => {
-    resolve({
-        _id: '',
-        name: 'UpdatedName',
-        breed: 'UpdatedBreed'
-    })
-}));
+import { loadingHennsResult, updatedHennResult, createdHennResult } from '../__mocksData__/fetchResults';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -24,13 +16,32 @@ const mockHenn: Henn = {
 
 const wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
 
-jest.mock('../services/henns.service');
+beforeAll(() => {
+    global.fetch = jest.fn((
+        url: RequestInfo, 
+        optn: RequestInit
+    ) => {
+            if(typeof optn.method !== undefined){
+                switch(optn.method){
+                    case 'GET':
+                        return Promise.resolve({
+                            json: () => Promise.resolve(loadingHennsResult),
+                        });
+                    case 'POST':
+                        return Promise.resolve({
+                            json: () => Promise.resolve(createdHennResult),
+                        });
+                    case 'PATCH':
+                        return Promise.resolve({
+                            json: () => Promise.resolve(updatedHennResult),
+                        });
+                }
+            }
+        }
+    ) as jest.Mock;
+});
 
 describe("HennItem Component", () => {
-
-    beforeAll(() => {
-        // wrapper = Enzyme.shallow<HennItem>(<HennItem {...mockHenn} />);   
-    });
 
     test("Should render HTML Element with 'HennItem' class", () => {
         expect(wrapper.find(".HennItem").exists()).toEqual(true);
@@ -70,12 +81,11 @@ describe("HennItem Component", () => {
     });
 
     test("Update Henn", () => {
-        const updatedHenn: Henn = {
-            _id: '',
-            name: 'UpdatedName',
-            breed: 'UpdatedBreed'
-        }
-        wrapper.instance().updateHenn(updatedHenn._id, updatedHenn.name, updatedHenn.breed);
+        return wrapper.instance().updateHenn(updatedHennResult._id, updatedHennResult.name, updatedHennResult.breed)
+        .then(res => {
+            expect(wrapper.state('updatingStatus')).toEqual('RESOLVED');
+            expect(res).toEqual(updatedHennResult);
+        });
     });
 
     test('Submit Form button should call updateHenn method from Component', () => {
