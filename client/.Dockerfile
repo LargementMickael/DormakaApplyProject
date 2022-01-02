@@ -1,4 +1,4 @@
-# *** Dockerfile for React client Kodify project ***
+# *** Dockerfile for React client Dormakaba project ***
 
 FROM node:16-stretch-slim
 
