@@ -7,7 +7,7 @@
 
 ## Usage
 
-`docker-compose up -d` or for every container separately `docker-compose up -d client server`
+`npm i -g rimraf typescript react-scripts`, and `docker-compose up -d`
 * Or from root directory
 `npm run build`, then :  
 `npm run start` to launch server and client;
