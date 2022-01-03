@@ -5,6 +5,7 @@
   "main": "./client/src/index.tsx",
   "scripts": {
     "build": "npm install",
+    "start_client": "cd ./client && yarn start",
     "start": "concurrently \"cd ./server && npm run serve\" \"cd ./client && yarn start\"",
     "test": "concurrently \"cd ./server && npm run test\" \"cd ./client && yarn test\"",
     "test_coverage": "concurrently \"cd ./server && npx jest --coverage\" \"cd ./client && npx jest --coverage\""

@@ -11,5 +11,6 @@
 * Or from root directory
 `npm run build`, then :  
 `npm run start` to launch server and client;
+`npm run start_client` to launch client with non-working server;
 `npm run test` to test each sides;
 `npm run test_coverage` to get tests coverage;
