@@ -1,5 +1,4 @@
 # *** Dockerfile for React client Dormakaba project ***
-
 FROM node:16-stretch-slim
 
 # Create and set App directory

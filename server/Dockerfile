@@ -1,12 +1,14 @@
 # *** Dockerfile for NodeJS backend Dormakaba project ***
-FROM node:16-stretch-slim
+FROM node:17.3-slim
 
 # Create and set App directory
 WORKDIR /usr/app
 
 #Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN yarn install
+
+COPY . .
 
 EXPOSE 5000
 

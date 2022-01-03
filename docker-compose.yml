@@ -5,7 +5,7 @@ services:
   server:
     build:
       context: ./server
-      dockerfile: .Dockerfile
+      dockerfile: Dockerfile
     container_name: dormakaba_server
     volumes:
       - ./server:/usr/app
@@ -20,7 +20,7 @@ services:
   client:
     build:
       context: ./client
-      dockerfile: .Dockerfile
+      dockerfile: Dockerfile
     container_name: dormakaba_client
     volumes:
       - ./client/:/usr/app
