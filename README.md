@@ -15,7 +15,7 @@
 `npm run test` to test each sides;
 `npm run test_coverage` to get tests coverage;
 
-## Deployment on EC2 Instance (running on Ubuntu 20.x)
+## Deployment on EC2 Instance (running on Ubuntu 20.04 LTS)
 
 Generating .ppk key from .pem key using PuttyGen<br>
 Connecting to instance using SSH protocol with Putty<br>
