@@ -6,8 +6,7 @@
 * `dormakaba_server` with Express on `https://localhost:5000` route
 
 ## Usage
-
-`npm i -g rimraf typescript react-scripts`, and `docker-compose up -d`
+`docker-compose up -d` and go to `localhost:3000`
 * Or from root directory
 `npm run build`, then :  
 `npm run start` to launch server and client;
