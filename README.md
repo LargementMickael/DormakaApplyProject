@@ -2,8 +2,8 @@
 
 ## Containers
 
-* `client` with React on `https://localhost:3000` route
-* `server` with Express on `https://localhost:5000` route
+* `dormakaba_client` with React on `https://localhost:3000` route
+* `dormakaba_server` with Express on `https://localhost:5000` route
 
 ## Usage
 
