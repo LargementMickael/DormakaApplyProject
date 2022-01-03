@@ -25,3 +25,4 @@ Connecting to instance using SSH protocol with Putty<br>
 `sudo apt install docker-compose` Install Docker Compose<br>
 `sudo docker-compose up` Install Docker<br>
 Update inbound security group and add 3000 and 5000 ports if you want to access containers<br>
+Go to `http://ec2-18-156-77-107.eu-central-1.compute.amazonaws.com:3000/`
