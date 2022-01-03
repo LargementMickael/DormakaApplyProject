@@ -1,4 +1,4 @@
-const HennServiceUrl: string = `http://localhost:5000/henns`;
+const HennServiceUrl: string = `http://ec2-18-156-77-107.eu-central-1.compute.amazonaws.com:5000/henns`;
 
 const loadHenns: () => Promise<Henn[]> = () => {
     return new Promise((resolve, reject) => {
