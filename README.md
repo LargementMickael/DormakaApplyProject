@@ -14,3 +14,14 @@
 `npm run start_client` to launch client with non-working server;
 `npm run test` to test each sides;
 `npm run test_coverage` to get tests coverage;
+
+## Deployment on EC2 Instance (running on Ubuntu 20.x)
+
+Generating .ppk key from .pem key using PuttyGen<br>
+Connecting to instance using SSH protocol with Putty<br>
+`sudo apt update` Update existing packages<br>
+`git clone https://github.com/LargementMickael/DormakaApplyProject.git` Cloning project into instance<br>
+`sudo apt install docker.io` Install Docker<br>
+`sudo apt install docker-compose` Install Docker Compose<br>
+`sudo docker-compose up` Install Docker<br>
+Update inbound security group and add 3000 and 5000 ports if you want to access containers<br>

@@ -6,7 +6,7 @@ WORKDIR /usr/app
 
 #Copy package.json and install dependencies
 COPY package*.json ./
-RUN yarn install
+RUN npm install npm && npm install
 
 COPY . .
 

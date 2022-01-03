@@ -9,11 +9,12 @@ services:
     container_name: dormakaba_server
     volumes:
       - ./server:/usr/app
+      - /usr/app/node_modules
     ports:
       - 5000:5000
     environment:
       - MONGO_URL=mongodb+srv://dormakaba:dormakaba@cluster0.1yiwk.mongodb.net
-      - CLIENT=http://localhost:3000
+      - CLIENT=http://client:3000
     networks:
       - mern-network
 
@@ -24,12 +25,13 @@ services:
     container_name: dormakaba_client
     volumes:
       - ./client/:/usr/app
+      - /usr/app/node_modules
     depends_on:
       - server
     ports:
       - "3000:3000"
     environment:
-      - API_SERVER=http://localhost:5000
+      - API_SERVER=http://server:5000
       - CHOKIDAR_USEPOLLING=true
     networks:
       - mern-network
