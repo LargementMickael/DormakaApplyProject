@@ -1,0 +1,24 @@
+{
+  "name": "dormakaba_apply_project",
+  "version": "1.0.0",
+  "description": "Dormakaba apply project",
+  "main": "./client/src/index.tsx",
+  "scripts": {
+    "start": "concurrently \"cd ./server && npm run serve\" \"cd ./client && yarn start\"",
+    "test": "concurrently \"cd ./server && npm run test\" \"cd ./client && yarn test\"",
+    "test_coverage": "concurrently \"cd ./server && npx jest --coverage\" \"cd ./client && npx jest --coverage\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LargementMickael/DormakaApplyProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LargementMickael/DormakaApplyProject/issues"
+  },
+  "homepage": "https://github.com/LargementMickael/DormakaApplyProject#readme",
+  "dependencies": {
+    "concurrently": "^6.5.1"
+  }
+}
